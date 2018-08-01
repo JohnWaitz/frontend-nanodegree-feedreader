@@ -29,7 +29,7 @@ $(function() {
     it('has url', function() {
       allFeeds.forEach(function(feed){
         expect(feed.url).toBeDefined();
-        expect(feed.url).not.toBe(0);
+        expect(feed.url.length).not.toBe(0);
         expect(feed.url).not.toBe('');
       })
     });
@@ -82,9 +82,7 @@ $(function() {
     * @description Before each test, call the asynchronous function loadFeed.
     */
     beforeEach(function(done) {
-      loadFeed(0, function() {
-        done();
-      });
+      loadFeed(0, done);
     });
 
     /**
@@ -92,11 +90,9 @@ $(function() {
     * its work, there is at least a single .entry element within the .feed
     * container.
     */
-    it('has at last a single entry', function(done) {
+    it('has at last a single entry', function() {
       const feedEntries = document.querySelectorAll('.feed .entry');
-
       expect(feedEntries.length).toBeGreaterThan(0);
-      done();
     });
   });
 
@@ -129,9 +125,8 @@ $(function() {
     * @description Ensures when a new feed is loaded by the loadFeed function
     * that the content actually changes.
     */
-    it('is loaded', function(done) {
+    it('is loaded', function() {
       expect(feed1).not.toBe(feed2);
-      done();
     });
   });
 }());
